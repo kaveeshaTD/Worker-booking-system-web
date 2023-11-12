@@ -1,0 +1,263 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="NavBar.master.cs" Inherits="ControlSys.NavBar" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="sitestyle.css" rel="stylesheet" />
+    <style>
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+.f-body{
+font-family: 'Poppins', sans-serif;
+display: block;
+align-items: center;
+justify-content: center;
+}
+.site-footer {
+background-color: #26272b;
+padding: 45px 0 20px;
+font-size: 15px;
+line-height: 24px;
+color: #737373;
+box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+.site-footer hr {
+border-top-color: #bbb;
+opacity: 0.5;
+}
+.site-footer hr.small {
+margin: 20px 0;
+}
+.site-footer h6 {
+color: #fff;
+font-size: 16px;
+text-transform: uppercase;
+margin-top: 5px;
+letter-spacing: 2px;
+}
+.site-footer a {
+color: #737373;
+}
+.site-footer a:hover {
+color: #fff;
+text-decoration: none;
+}
+.footer-links {
+padding-left: 0;
+list-style: none;
+}
+.footer-links li {
+display: block;
+}
+.footer-links a {
+color: #737373;
+}
+.footer-links a:active,
+.footer-links a:focus,
+.footer-links a:hover {
+color: #fff;
+text-decoration: none;
+}
+.site-footer .social-icons {
+text-align: right;
+}
+.site-footer .social-icons a {
+width: 40px;
+height: 40px;
+line-height: 40px;
+margin-left: 6px;
+margin-right: 0;
+border-radius: 100%;
+background-color: #33353d;
+}
+.copyright-text {
+margin: 0;
+}
+@media (max-width: 991px) {
+.site-footer [class^="col-"] {
+margin-bottom: 30px;
+}
+}
+@media (max-width: 767px) {
+.site-footer {
+padding-bottom: 0;
+}
+.site-footer .copyright-text,
+.site-footer .social-icons {
+text-align: center;
+}
+}
+.social-icons {
+padding-left: 0;
+margin-bottom: 0;
+list-style: none;
+}
+.social-icons li {
+display: inline-block;
+margin-bottom: 4px;
+}
+.social-icons a {
+background-color: #eceeef;
+color: #818a91;
+font-size: 16px;
+display: inline-block;
+line-height: 44px;
+width: 44px;
+height: 44px;
+text-align: center;
+margin-right: 8px;
+border-radius: 100%;
+-webkit-transition: all 0.2s linear;
+-o-transition: all 0.2s linear;
+transition: all 0.2s linear;
+}
+.logo{
+color:#eb6857;
+}
+.social-icons a:active,
+.social-icons a:focus,
+.social-icons a:hover {
+color: #fff;
+background-color: #29aafe;
+}
+.social-icons a.facebook:hover {
+background-color: #3b5998;
+}
+.social-icons a.twitter:hover {
+background-color: #00aced;
+}
+.social-icons a.linkedin:hover {
+background-color: #007bb6;
+}
+.social-icons a.dribbble:hover {
+background-color: #ea4c89;
+}
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="nav-id">
+            <div class="container-lg">
+                <%--<a class="navbar-brand fw-bold" href="Mainpage.aspx">THE JOB BORD</a>--%>
+                <asp:HyperLink ID="HyperLink1" class="navbar-brand fw-bold" runat="server" href="Mainpage.aspx">THE JOB BORD</asp:HyperLink>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link active" aria-current="page" href="#pg-top">Home</a>
+                        <a class="nav-link" href="#About">About</a>
+                        <a class="nav-link" href="#services">Services</a>
+                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link me-4" href="#feedbacks">Feedbacks</a>
+                        <div>
+                            <asp:Button ID="btnlogin" runat="server" Text="Login" CssClass="btn btn-primary ms-4" OnClick="btnlogin_Click" OnClientClick="return false;" />
+                        </div>
+                        <div class="dropdown">
+                            <%--<asp:Label ID="lblsessionname" runat="server" Text="" CssClass="text-danger" ><%=(string) Session["UserRole"]%> &nbsp; <%=(string) Session["Frist_Name"]%>  </asp:Label>--%>
+                            <asp:Panel ID="Panel1drop" runat="server">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <%=(string) Session["UserRole"]%> &nbsp; <%=(string) Session["Frist_Name"]%>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    
+                                     <li><asp:LinkButton ID="btnchangepassword" runat="server" CssClass="dropdown-item">Change Password</asp:LinkButton></li>
+                                       <li><asp:LinkButton ID="btnlogout" runat="server" OnClick="btnlogout_Click" CssClass="dropdown-item">Log Out</asp:LinkButton></li>
+                                     <li><asp:LinkButton ID="btnmybookingview" runat="server" OnClick="btnmybookingview_Click" CssClass="dropdown-item">My Booking</asp:LinkButton></li>
+
+                                </ul>
+                            </asp:Panel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <%--<div class="Login">
+
+        </div>--%>
+        <div class="">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+
+
+         <div class="f-body mt-5">
+        <footer class="site-footer">
+<div class="container">
+<div class="row">
+<div class="col-sm-12 col-md-6">
+<h6>About</h6>
+<p class="text-justify mt-3">Welcome to Sri Lankan largest job platform. We are connecting Sri Lankan employers with Sri Lankan workers. 
+JobBoard.lk is the largest online workforce available in Sri Lanka. Our workers will complete your job within the shortest time period for minimum budget</p>
+</div>
+<div class="col-6 col-md-3">
+<h6>Categories</h6>
+<ul class="footer-links mt-3">
+<li><a href="#">Carpentry</a></li>
+<li><a href="#">Mason</a></li>
+<li><a href="#">Garden Cleaner</a></li>
+<li><a href="#">plumber</a></li>
+<li><a href="#">painter</a></li>
+<li><a href="#">Electrician</a></li>
+</ul>
+</div>
+<div class="col-6 col-md-3">
+<h6>Quick Links</h6>
+<ul class="footer-links mt-3">
+<li><a href="#homeid">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#servid">Services</a></li>
+<li><a href="#priceings">Contact us</a></li>
+<li><a href="#conid">Reviews</a></li>
+</ul>
+</div>
+</div>
+<hr class="small">
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-8 col-sm-6 col-12">
+<p class="copyright-text">Copyright © 2023 All Rights Reserved by
+<a href="#"><span class="logo">The job Board</span></a>
+</p>
+</div>
+<div class="col-md-4 col-sm-6 col-12">
+<ul class="social-icons">
+<li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
+<li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+<li><a class="dribbble" href="#"><i class="fab fa-dribbble"></i></a></li>
+<li><a class="linkedin" href="#"><i class="fab fa-linkedin-in"></i></a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+
+        </div>
+    </form>
+
+    <%--    jquery
+       <script type="text/javascript">
+        //if (typeof jQuery == undefined) {
+        //    alert("not working");
+        //} else {
+        //    alert("working");
+        //   }
+
+           $("#btnlogin").click(function () {
+               $(".Login").toggle(); // Toggle the visibility of the element
+           });
+       </script>--%>
+</body>
+</html>

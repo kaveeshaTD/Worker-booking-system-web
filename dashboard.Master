@@ -1,0 +1,511 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="dashboard.master.cs" Inherits="ControlSys.dashboard" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="Boostrap/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="Boostrap/CSS/style.css" rel="stylesheet" />
+    <script src="Boostrap/JS/bundle.min.js"></script>
+    <script src="Boostrap/JS/jquery-3.3.1.min.js"></script>
+    <script src="Boostrap/JS/main.js"></script>
+    <script src="Boostrap/JS/popper.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'>
+    <style>
+        /* Google Fonts Import Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.sidebar{
+  position: fixed;
+  top: 0; /*get space from top*/
+  left: 0;
+  height: 100%;
+  width: 260px;
+  z-index: 100;
+  transition: all 0.5s ease;
+  background: #fff;
+}
+.sidebar.close{
+  width: 78px;
+}
+.sidebar .logo-details{
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.sidebar .logo-details i{
+  font-size: 30px;
+  color: #11101d;
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+}
+.sidebar .logo-details .logo_name{
+  font-size: 22px;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.3s ease;
+  transition-delay: 0.1s;
+}
+.sidebar.close .logo-details .logo_name{
+  transition-delay: 0s;
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar .nav-links{
+  height: 100%;
+  padding: 30px 0 150px 0;
+  overflow: auto;
+}
+.sidebar.close .nav-links{
+  overflow: visible;
+}
+.sidebar .nav-links::-webkit-scrollbar{
+  display: none;
+}
+.sidebar .nav-links li{
+  position: relative;
+  list-style: none;
+  transition: all 0.4s ease;
+}
+.sidebar .nav-links > li.active:before,
+.sidebar .nav-links > li:before{
+  position:absolute;
+  left:0;
+  top:0;
+  content:'';
+  width:4px;
+  height:100%;
+  background:#93181a;
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+  border-top-right-radius:5px;
+  border-top-right-radius:5px;
+}
+.sidebar .nav-links li.active:before,
+.sidebar .nav-links li:hover:before{
+  opacity: 1;
+}
+.sidebar .nav-links li .iocn-link{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar.close .nav-links li .iocn-link{
+  display: block
+}
+.sidebar .nav-links li i{
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+  color: #11101d;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-links li.active i,
+.sidebar .nav-links li:hover i{
+  color: #93181a;  
+}
+.sidebar .nav-links li.showMenu i.arrow{
+  transform: rotate(-180deg);
+}
+.sidebar.close .nav-links i.arrow{
+  display: none;
+}
+.sidebar .nav-links li a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.sidebar .nav-links li a .link_name{
+  font-size: 16px;
+  font-weight: 400;
+  color: #11101d;
+  transition: all 0.4s ease;
+}
+.sidebar .nav-links li.active a .link_name,
+.sidebar .nav-links li:hover a .link_name{  
+  color: #93181a;
+}
+.sidebar.close .nav-links li a .link_name{
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar .nav-links li .sub-menu{
+  padding: 6px 6px 14px 80px;
+  margin-top: -10px;
+  background: #fff;
+  display: none;
+}
+.sidebar .nav-links li.showMenu .sub-menu{
+  display: block;
+}
+.sidebar .nav-links li .sub-menu a{
+  color: #1d1b31;
+  font-size: 15px;
+  padding: 5px 0;
+  white-space: nowrap;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+.sidebar .nav-links li .sub-menu a:hover{
+  opacity: 1;
+}
+.sidebar.close .nav-links li .sub-menu{
+  position: absolute;
+  left: 100%;
+  top: -10px;
+  margin-top: 0;
+  padding: 10px 20px;
+  border-radius: 0 6px 6px 0;
+  opacity: 0;
+  display: block;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar.close .nav-links li:hover .sub-menu{
+  top: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+}
+.sidebar .nav-links li .sub-menu .link_name{
+  display: none;
+}
+.sidebar.close .nav-links li .sub-menu .link_name{
+  font-size: 18px;
+  opacity: 1;
+  display: block;
+}
+.sidebar .nav-links li .sub-menu.blank{
+  opacity: 1;
+  pointer-events: auto;
+  padding: 3px 20px 6px 16px;
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar .nav-links li:hover .sub-menu.blank{
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar .profile-details{
+  position: fixed;
+  bottom: 0;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1d1b31;
+  padding: 12px 0;
+  transition: all 0.5s ease;
+}
+.sidebar.close .profile-details{
+  background: none;
+}
+.sidebar.close .profile-details{
+  width: 78px;
+}
+.sidebar .profile-details .profile-content{
+  display: flex;
+  align-items: center;
+}
+.sidebar .profile-details img{
+  height: 52px;
+  width: 52px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 0 14px 0 12px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+}
+.sidebar.close .profile-details img{
+  padding: 10px;
+}
+.sidebar .profile-details .profile_name,
+.sidebar .profile-details .job{
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.sidebar .profile-details .job{
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  opacity:.5;
+  white-space: nowrap;
+}
+.sidebar .profile-details i.bx{  
+    min-width: 50px;
+}
+
+.sidebar.close .profile-details i,
+.sidebar.close .profile-details .profile_name,
+.sidebar.close .profile-details .job{
+  display: none;
+}
+.sidebar .profile-details .job{
+  font-size: 12px;
+}
+.home-section{
+    z-index:-1;
+  margin-top:50px;   /*get space from top side*/
+  position: absolute;
+  background: white;
+  height: 100vh;
+  left: 260px;
+  width: calc(100% - 260px);
+  transition: all 0.5s ease;
+}
+.sidebar.close ~ .home-section{
+  left: 78px;
+  width: calc(100% - 78px);
+}
+.home-section .home-content{
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.home-section .home-content .bx-menu,
+.home-section .home-content .text{
+  color: #11101d;
+  font-size: 35px;
+}
+.home-section .home-content .bx-menu{
+  margin: 0 15px;
+  cursor: pointer;
+}
+.home-section .home-content .text{
+  font-size: 26px;
+  font-weight: 600;
+}
+@media (max-width: 420px) {
+  .sidebar.close .nav-links li .sub-menu{
+    display: none;
+  }
+}
+.cname{
+    color:black;
+    margin-left:6rem;
+    font-weight:bold;
+    font-size:20px;
+    text-decoration:none;
+    position:fixed;
+    top:0.5rem;
+    display:inline;
+   
+}
+.nv-bar{
+    background:#fff;
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    height:50px;
+}
+.mylbtn{
+    float:right;
+    margin-right:4rem;
+    padding:6px 25px 6px 25px;
+    margin-top:10px;
+    color:black;
+    background:white;
+    border-radius:8px;
+    font-size:15px;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    font-weight:bold;
+    border:2px solid black
+}
+.ss{
+     margin-left:5rem;
+     margin-top:5rem;
+}
+</style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+        <form id="form1" runat="server">
+       <%-- start--%>
+<div class="nv-bar">
+  <div>
+       <asp:HyperLink ID="HyperLink1" class="cname" runat="server" href="dashbordHomepahe.aspx">THE JOB BORD DASHBORD</asp:HyperLink>
+      <asp:LinkButton ID="btndname" runat="server" CssClass="btn btn-primary mylbtn"><%=(string) Session["UserRole"]%> &nbsp; <%=(string) Session["Frist_Name"]%></asp:LinkButton>
+      <%--<h2 class="btn btn-primary mylbtn" id="dname"> <%=(string) Session["UserRole"]%> &nbsp; <%=(string) Session["Frist_Name"]%></h2>--%>
+  </div>
+</div>
+        <%--end --%>
+
+       <div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus'></i>
+       <%-- <asp:HyperLink ID="HyperLink1" class="logo_name text-dark cname" runat="server" href="Mainpage.aspx">THE JOB BORD</asp:HyperLink>
+      <span class="logo_name text-dark cname">IC HOLDINGS</span>--%>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt' ></i>
+          <span class="link_name">Dashboard</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Category</a></li>
+        </ul>
+      </li>
+        <asp:Panel ID="panaljobs" runat="server">
+      <li class="active" id="listmymain">
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-collection' ></i>
+            <span class="link_name">Jobs</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow'></i>
+        </div>
+        <ul class="sub-menu">
+          <%--<li><a class="link_name" href="#">Category</a></li>--%>
+            <li><asp:LinkButton ID="btnlinkjobsworker" runat="server" CssClass="link_name">My Jobs</asp:LinkButton></li>
+          <li><a href="viewcptdtls.aspx">New Jobs</a></li>
+            <li><asp:LinkButton ID="btncompjob" runat="server" OnClick="btncompjob_Click">Compleate Jobs</asp:LinkButton></li>
+          <%--<li><a href="sample.aspx">Compleate Jobs</a></li>--%>
+        </ul>
+      </li>
+        </asp:Panel>
+        <asp:Panel ID="panalworkers" runat="server">
+            <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name">Workers</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Workers</a></li>
+          <li><a href="bookcptr.aspx">Carpentry</a></li>
+          <li><a href="bookmayson.aspx">Mason</a></li>
+          <li><a href="BOOKGardenMaker.aspx">Garden Cleaner</a></li>
+           <li><a href="bookPlumber.aspx">plumber</a></li>
+          <li><a href="bookpainter.aspx">painter</a></li>
+          <li><a href="bookele.aspx">Electrician</a></li>
+        </ul>
+      </li>
+</asp:Panel>
+      <li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-add-to-queue' ></i>
+          <span class="link_name">Analytics</span>
+        </a>
+        <ul class="sub-menu blank">
+         <%-- <li><a class="link_name" href="#">Analytics</a></li>--%>
+             <asp:HyperLink ID="appwreq" CssClass="link_name" runat="server" href="approveworkreq.aspx">Approve request</asp:HyperLink>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-message' ></i>
+          <span class="link_name">Messages</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="Adminmessages.aspx">Messages</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="link_name">Settings</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">settings</a></li>
+          <li><a href="#">Change Password</a></li>
+          <li><asp:LinkButton ID="btnlogoutdbord" runat="server" OnClick="btnlogoutdbord_Click">Log Out</asp:LinkButton></li>
+        </ul>
+      </li>
+  <%--    <li>
+        <a href="#">
+          <i class='bx bx-compass' ></i>
+          <span class="link_name">Explore</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Explore</a></li>
+        </ul>
+      </li>--%>
+      <li>
+        <a href="#">
+          <i class='bx bx-home'></i>
+          <span class="link_name">Go to Web</span>
+        </a>
+        <ul class="sub-menu blank">
+          <%--<li><a class="link_name" href="#">History</a></li>--%>
+            <asp:HyperLink ID="HyperLink2" runat="server" CssClass="link_name" href="Mainpage.aspx">Go to Web</asp:HyperLink>
+        </ul>
+      </li>
+    
+      <li>
+<%--    <div class="profile-details">
+      <div class="profile-content">
+        <img src="https://gravatar.com/avatar/f57bddebd1edf91412d5d68702530099" alt="profileImg">
+      </div>
+      <div class="name-job">
+        <div class="profile_name">Dumitru Chirutac</div>
+        <div class="job">Web Desginer</div>
+      </div>
+      <i class='bx bx-log-out' ></i>
+    </div>--%>
+  </li>
+</ul>
+  </div>
+  <section class="home-section">
+    <div class="home-content br-btn">
+     <%-- <i class='bx bx-menu' id="bgricn"></i>--%>
+      <span class="text"></span>
+    </div>
+  </section>
+                    <div class="ss">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+     <script type="text/javascript">
+
+         //if (typeof jQuery == "undifine") {
+         //    alert("not working");
+         //} else {
+         //    alert(" working");
+         //}
+         let arrow = document.querySelectorAll(".arrow");
+         for (var i = 0; i < arrow.length; i++) {
+             arrow[i].addEventListener("click", (e) => {
+                 let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+                 arrowParent.classList.toggle("showMenu");
+             });
+         }
+         let sidebar = document.querySelector(".sidebar");
+         let sidebarBtn = document.querySelector(".bx-menu");
+         console.log(sidebarBtn);
+         sidebarBtn.addEventListener("click", () => {
+             sidebar.classList.toggle("close");
+         });
+         
+     </script>>
+</body>
+</html>

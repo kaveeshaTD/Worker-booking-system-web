@@ -1,0 +1,2 @@
+Before run the project import the construction.bacpac db file to the ms sql server . or if you want 
+you can create the tables manualy by using db query file queries

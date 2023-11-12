@@ -1,0 +1,90 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+
+
+.about-us {
+    margin-top: 6rem;
+}
+
+.pic {
+    height: 410px;
+    width: 480px;
+    border-radius: 20px;
+}
+
+.mycls {
+    text-transform: uppercase
+}
+
+.about {
+    width: 1130px;
+    max-width: 85%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.text {
+    width: 800px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    margin-left: 50px;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-bottom: 30px;
+}
+
+    .text h2 {
+        font-size: 40px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .text h5 {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+span {
+    color: #4070f4;
+}
+.m-top{
+    color:white;
+}
+.text p {
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 1px;
+}
+
+.data {
+    margin-top: 30px;
+}
+
+.mybtn {
+    font-size: 14px;
+    background: #0275d8;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    padding: 8px 25px;
+    border-radius: 6px;
+    transition: 0.5s;
+}
+
+    .mybtn:hover {
+        background: #000;
+        margin-left: 10px;
+    }
+
+
+.service-start{
+    margin-top:6rem;
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:2rem;
+}
+ 
+
+
+
